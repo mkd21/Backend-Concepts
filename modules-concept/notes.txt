@@ -1,0 +1,26 @@
+
+
+this will be the syntax when we are using (COMMON JS) module system
+
+
+we use module.export "file name" to export the file 
+
+and 
+
+for import we use ---> require("file name)
+
+
+BELOW WILL BE THE SYNTAX FOR (ES MODULE)
+
+for exporting methods 
+
+export default "function name" 
+or 
+i know how 
+
+
+for importing we use 
+
+import {} "path  if exported without default
+
+import "anyName" if exported defaultly
