@@ -1,0 +1,14 @@
+SOME POINTS RELATED TO CLI AND NODE 
+
+--> to enter the node environment in cli simply type node and enter 
+
+--> to come outside the node environment from cli , type process.exit() --> shortcut is ctrl d or .exit 
+
+
+To access global object of any js runtime we can use 
+
+"globalThis" feature of node which was introduced in ES-2020
+
+
+However, we'll still see global used in lots of Node.js code, 
+especially in older codebases or when working specifically with Node.js features

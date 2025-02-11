@@ -1,0 +1,19 @@
+
+
+managing node version using NVM
+
+it's full form is Node Version Manager
+
+we can manage the node version directly from command promt.
+
+it is useful when different projects require different versions of node.js to work
+
+to get any specific version 
+type 
+
+nvm 22.13.1 ---> this is the specific version of node.js we want to use now
+
+
+like this only we can switch between the versions seemlessly
+
+
