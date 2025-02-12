@@ -1,0 +1,12 @@
+
+path module is a inbuilt utility in node which contains methods to transform the file path
+
+features 
+
+path manipulation --> the path module helps in creating a file path that work seemlessly in any OS like windows , mac , linux
+
+platform independence --> file path differ in different OS. windows use "/" and POSIX system use "\" slash. the path module 
+                          abstracts these differences ensuring that your file works seemlessly on any OS 
+
+
+ 
