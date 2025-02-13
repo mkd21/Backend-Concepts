@@ -1,0 +1,1 @@
+text written with the help of fs module writeFileSync method

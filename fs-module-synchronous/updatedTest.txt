@@ -1,0 +1,1 @@
+created a file and entered the data, all by using writeFileSync method
