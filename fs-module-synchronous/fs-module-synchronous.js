@@ -104,11 +104,12 @@ const connectedPath = pathModule.join(__dirname , "test-folder" , "test-folder1.
 const oldFilePath = pathModule.join(__dirname , "test-folder" , "test-folder1.txt"); // will connect the old file path
 const newFilePath = pathModule.join(__dirname , "test-folder" , "test-folder1_updated.txt");  // connected the new file path
 
-try 
-{
-    fsModule.renameSync(oldFilePath , newFilePath);
-}
-catch(Err)
-{
-    console.log("error occured",Err);
-}
+// try 
+// {
+//     fsModule.renameSync(oldFilePath , newFilePath);
+// }
+// catch(Err)
+// {
+//     console.log("error occured",Err);
+// }
+
