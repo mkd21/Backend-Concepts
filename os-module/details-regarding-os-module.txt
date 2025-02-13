@@ -1,0 +1,18 @@
+
+os module is a built in module of node js which provides method by which we can get the details of the OS as per our needs
+
+
+
+-------------------------- NOTE -------------------------- 
+
+when we will use a method called networkInterfaces() it will return the details about all the network interfaces.
+
+
+there will be a Internal Network.
+
+it is used for internal communication.
+
+when we create a local host for testing any application 
+
+its IP is 127.0.0.1 for IPv4 or ::1 for IPv6.
+
