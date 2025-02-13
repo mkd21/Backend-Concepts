@@ -39,4 +39,3 @@ const directory = path.dirname(filePath);
 
 const forwardOrBackSlash_which_is_valid = path.sep;       // will tell which seperator is valid for specific OS
 console.log(forwardOrBackSlash_which_is_valid);
-
