@@ -1,0 +1,2 @@
+created from fs-module
+this file was created from fs-module-async file
