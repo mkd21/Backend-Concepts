@@ -1,0 +1,3 @@
+data made available using promise based fs module writeFile method/n file contents updated by using appendFile method
+file contents updated by using appendFile method
+file contents updated by using appendFile method
