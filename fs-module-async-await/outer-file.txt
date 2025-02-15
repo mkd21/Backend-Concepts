@@ -1,0 +1,2 @@
+Data made available using async await function
+Data is added using append file method without overwriting the already existing data
