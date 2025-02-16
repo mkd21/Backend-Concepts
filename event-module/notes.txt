@@ -1,0 +1,25 @@
+
+To use the event module we need to do some steps 
+
+--> first of all require the event module 
+
+--> create an object of event class or module 
+
+    ex :    const event = require("events);
+            const eventObj = new event();
+
+            now this (eventObj) has all the properties of event module / class
+
+
+to use this 
+
+
+eventObj.on();  --> will have to mention the function name on which we want to set the event  
+                    it accepts 2 arguements:
+
+                    function name , and the callback function which will contain that logic which should happen after event is triggered
+
+                    or 
+
+                    function name , reference of the function which will contain the logic that will be executed after the event 
+                    
