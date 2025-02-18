@@ -1,0 +1,32 @@
+
+http module is used to create the server 
+
+we use createServer() method to create the server. 
+
+it accespt callback function as an arguement
+
+callback function accepts 2 arguements 
+
+(req , res) =>{
+
+}
+
+req is the request object that we use to handle the request from the server.
+res is the response object that we use to handle the response from the server.
+
+some method of req object is 
+
+req.url --> used to request the url by the client 
+
+req.method --> for http methods like (get , post , put , delete)
+
+there are more methods of request and response object. will learn as we proceed further
+
+
+res.setHeader() this method is used to send the meta data about the response 
+
+like  
+
+res.setHeader("content-type , "text / plain)  ---> client wil know that the response is in the form of plain text 
+
+res.setHeader("content-type" , "text/ html) --> client will get to know that the response is in html format 
