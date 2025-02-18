@@ -1,0 +1,18 @@
+
+
+when we install any package locally then it will be visible in dependencies of json file 
+
+so to check if it is installed or not we must use npx nodemon -v 
+
+
+when we install any package globally then we can use 
+
+npm nodemon -v 
+
+
+we can also automate the server start functionality without the use of nodemon
+
+by just doing 
+
+node --watch "filename"
+
