@@ -1,0 +1,20 @@
+
+
+
+STREAMS 
+
+streams in node js are object which helps us in reading the data from source and writing the data to the destination 
+
+in small chunks rather than reading and writing the entire data at once. 
+
+this makes streams ideal for working with large files.
+
+
+BUFFER
+
+buffers are the temporary memory allocated for binary data.
+
+buffer allows node js to work with raw binary data 
+
+buffer are useful when data is coming from file system , network requests or other I/O operations where data isn't initially in string format.
+
