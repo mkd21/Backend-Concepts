@@ -1,0 +1,6 @@
+
+
+readline module is a built in module of node js.
+
+it is used to create the interactive Comman Line Interface(CLI)
+
