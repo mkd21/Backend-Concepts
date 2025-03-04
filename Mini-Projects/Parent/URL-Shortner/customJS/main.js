@@ -4,16 +4,34 @@ document.addEventListener("DOMContentLoaded" , () =>{
     const formParent = document.getElementById("formSection");
 
     
-    const submitButton = document.querySelector(".submitButton");
-    
-    submitButton.addEventListener("click" , (event) =>{
-        console.log("executed");
+    formParent.addEventListener("submit" , async(event) =>{
+
         event.preventDefault();
         
         const formDataObj = new FormData(formParent);
         const url = formDataObj.get("url");
         const customName = formDataObj.get("userCustomURLname");
 
-        console.log(url , customName);
+        try
+        {
+            const res = await fetch("/shortenUrl" , {
+                method : "POST",
+                headers : {"Content-Type" : "application/json"},
+                body : JSON.stringify({url , customName})
+            });
+            if(res.ok)
+            {
+                alert("form submitted successfully");
+            }
+            else
+            {
+                const errMessage = await res.text();
+                alert(errMessage);
+            }
+        }
+        catch(err)
+        {
+            console.log("error is",err.message);
+        }
     })
 });
