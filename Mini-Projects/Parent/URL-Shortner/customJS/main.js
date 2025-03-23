@@ -3,6 +3,15 @@ document.addEventListener("DOMContentLoaded" , () =>{
 
     const formParent = document.getElementById("formSection");
 
+    const fetch_Links_CustomName = async() =>{
+        
+        const res = await fetch("/getData");
+        const meaningfulData = await res.json();
+        console.log(meaningfulData);
+
+        const container = document.getElementById("linksDisplayArea");
+        container.innerText = meaningfulData;
+    }
     
     formParent.addEventListener("submit" , async(event) =>{
 
@@ -19,9 +28,11 @@ document.addEventListener("DOMContentLoaded" , () =>{
                 headers : {"Content-Type" : "application/json"},
                 body : JSON.stringify({url , customName})
             });
+
             if(res.ok)
             {
                 alert("form submitted successfully");
+                fetch_Links_CustomName();
             }
             else
             {
@@ -33,5 +44,5 @@ document.addEventListener("DOMContentLoaded" , () =>{
         {
             console.log("error is",err.message);
         }
-    })
+    });
 });

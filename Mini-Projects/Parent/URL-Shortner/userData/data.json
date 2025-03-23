@@ -1,20 +1,8 @@
 {
-    "custom": {
+    "happy": {
         "url": "https://www.google.com"
     },
-    "custom2": {
-        "url": "https://www.google.com"
-    },
-    "custom3": {
-        "url": "https://www.google.com"
-    },
-    "custom4": {
-        "url": "https://www.google.com"
-    },
-    "custom5": {
-        "url": "https://www.google.com"
-    },
-    "custom6": {
+    "test1": {
         "url": "https://www.google.com"
     }
 }

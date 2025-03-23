@@ -10,9 +10,15 @@ import fsModule from "fs/promises";
 import path from "path";
 
 
+const passDataToFrontend = async(dbPath) =>{
+    const contents = await fsModule.readFile(dbPath , "utf-8");
+    return contents;
+}
+
+
 const checkRedundancy = async(filePath_dataStorage , newEntry) =>{
 
-    let {url , customName} = newEntry;
+    let {url , customName} = newEntry;   // destructuring the url and customName variable. these variable are containing the values
 
     let jsonParentObj = {};
 
@@ -40,8 +46,10 @@ const checkRedundancy = async(filePath_dataStorage , newEntry) =>{
     return jsonParentObj;
 }
 
+
 const server = httpModule.createServer( async (req , res) =>{
 
+   
     if(req.method == "GET")
     {
         try 
@@ -49,6 +57,7 @@ const server = httpModule.createServer( async (req , res) =>{
             let filePath = "";
             let contentType = "text/plain";
             let fileData = "";
+
             if(req.url == "/"){
                 filePath = path.join(__dirname ,  "frontend-folder" , "index.html");
                 fileData = await fsModule.readFile(filePath);
@@ -64,6 +73,22 @@ const server = httpModule.createServer( async (req , res) =>{
                 fileData = await fsModule.readFile(filePath);
                 contentType = "text/css";
             }
+            else if(req.url == "/getData")
+            {
+                try
+                {
+                    const dbPath = path.join(__dirname , "userData" , "data.json");
+                    const contentsInsideDB = await passDataToFrontend(dbPath);
+
+                    res.writeHead(200 , {"Content-Type" : "application/json"});
+                    return res.end(contentsInsideDB);
+                }
+                catch(err)
+                {
+                    res.writeHead(500, { "Content-Type": "text/plain" });
+                    res.end("Error reading data file.");
+                }
+            }
 
             res.writeHead(200 , {"Content-Type" : contentType});
             res.end(fileData);
@@ -78,45 +103,43 @@ const server = httpModule.createServer( async (req , res) =>{
     {
         if(req.url == "/shortenUrl")
         {
-                let data = "";
-                req.on("data" , (chunkedData) => data += chunkedData);
+            let data = "";
+            req.on("data" , (chunkedData) => data += chunkedData);
 
-                req.on("end" , async() =>{
+            req.on("end" , async() =>{
 
-                    try
+                try
+                {
+                    let newEntry = JSON.parse(data);
+                    const {url} = newEntry;
+
+                    if(!url)
                     {
-                        let newEntry = JSON.parse(data);
-                        const {url} = newEntry;
-
-                        if(!url)
-                        {
-                            res.writeHead(400 , {"Content-Type" : "text/plain"});
-                            return res.end("Please check the url");
-                        }
-
-                        const filePath_dataStorage = path.join(__dirname , "userData" , "data.json");
-                        
-                        // function for checking redundant username and putting data into a single json object
-                        
-                        const detailedObj = await checkRedundancy(filePath_dataStorage , newEntry);
-                        
-                        const stringifiedData = JSON.stringify(detailedObj , null , 4);
-
-                        console.log("data returned from above function is",stringifiedData);
-
-                        await fsModule.writeFile(filePath_dataStorage , stringifiedData);
-
-                        res.writeHead(200 , {"Content-Type" : "application/json"});
-                        res.end(JSON.stringify({status : 200 , stringifiedData}));
+                        res.writeHead(400 , {"Content-Type" : "text/plain"});
+                        return res.end("Please check the url");
                     }
-                    catch(err)
-                    {
-                        console.log("error occured while writing the file",err);
-                        res.writeHead(404 , {"Content-Type" : "text/plain"});
-                        res.end(err.message);
-                    }
+
+                    const filePath_dataStorage = path.join(__dirname , "userData" , "data.json");
                     
-                });
+                    // function for checking redundant username and putting data into a single json object
+                        
+                    const detailedObj = await checkRedundancy(filePath_dataStorage , newEntry);
+                        
+
+                    const stringifiedData = JSON.stringify(detailedObj , null , 4);
+
+                    await fsModule.writeFile(filePath_dataStorage , stringifiedData);
+
+                    res.writeHead(200 , {"Content-Type" : "application/json"});
+                    res.end(JSON.stringify({status : 200 , stringifiedData}));
+                }
+                catch(err)
+                {
+                    console.log("error occured while writing the file",err);
+                    res.writeHead(404 , {"Content-Type" : "text/plain"});
+                    res.end(err.message);
+                }
+            });
         }
     }
     else
