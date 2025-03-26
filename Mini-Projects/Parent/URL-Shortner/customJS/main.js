@@ -7,10 +7,18 @@ document.addEventListener("DOMContentLoaded" , () =>{
         
         const res = await fetch("/getData");
         const meaningfulData = await res.json();
-        console.log(meaningfulData);
 
+        console.log(meaningfulData);
         const container = document.getElementById("linksDisplayArea");
-        container.innerText = meaningfulData;
+
+        for(const [customName , url] of Object.entries(meaningfulData))
+        {
+            const li = document.createElement("li");
+        
+            li.innerHTML = ` <a href="/${customName}" target = "_blank"> ${window.location.origin}/${customName} </a> - ${url} `;
+
+            container.append(li);
+        }
     }
     
     formParent.addEventListener("submit" , async(event) =>{
@@ -45,4 +53,6 @@ document.addEventListener("DOMContentLoaded" , () =>{
             console.log("error is",err.message);
         }
     });
+
+    fetch_Links_CustomName();
 });

@@ -10,7 +10,7 @@ import fsModule from "fs/promises";
 import path from "path";
 
 
-const passDataToFrontend = async(dbPath) =>{
+const ReadFileData = async(dbPath) =>{
     const contents = await fsModule.readFile(dbPath , "utf-8");
     return contents;
 }
@@ -42,14 +42,13 @@ const checkRedundancy = async(filePath_dataStorage , newEntry) =>{
         throw new Error("Name already exist, please select some other name");
     }
 
-    jsonParentObj[customName] = {url : url };
+    jsonParentObj[customName] = url;
     return jsonParentObj;
 }
 
 
 const server = httpModule.createServer( async (req , res) =>{
 
-   
     if(req.method == "GET")
     {
         try 
@@ -78,7 +77,7 @@ const server = httpModule.createServer( async (req , res) =>{
                 try
                 {
                     const dbPath = path.join(__dirname , "userData" , "data.json");
-                    const contentsInsideDB = await passDataToFrontend(dbPath);
+                    const contentsInsideDB = await ReadFileData(dbPath);
 
                     res.writeHead(200 , {"Content-Type" : "application/json"});
                     return res.end(contentsInsideDB);
@@ -88,6 +87,28 @@ const server = httpModule.createServer( async (req , res) =>{
                     res.writeHead(500, { "Content-Type": "text/plain" });
                     res.end("Error reading data file.");
                 }
+            }
+            else 
+            {
+                try 
+                {
+                    const filePath = path.join(__dirname , "userData" , "data.json");
+                    const data_in_JSON = await ReadFileData(filePath);
+                    const data_in_jsFormat = JSON.parse(data_in_JSON);
+
+                    const customName = req.url.slice(1);
+                    if(data_in_jsFormat[customName])
+                    {
+                        res.writeHead(302 , {location : data_in_jsFormat[customName]})
+                        return res.end();
+                    }
+                }
+                catch(err)
+                {
+                    res.writeHead(404 , {"Content-Type" : "application/json"});
+                    return res.end();
+                }
+                
             }
 
             res.writeHead(200 , {"Content-Type" : contentType});
